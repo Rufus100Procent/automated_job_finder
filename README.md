@@ -9,5 +9,4 @@
 
 source & credit 
 
-- https://data.arbetsformedlingen.se/data/jobsearch
-- https://jobsearch.api.jobtechdev.se/
+- https://data.arbetsformedlingen.se/
