@@ -1,4 +1,4 @@
-package aj.finder.ajfinder;
+package aj.finder.ajfinder.config;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;

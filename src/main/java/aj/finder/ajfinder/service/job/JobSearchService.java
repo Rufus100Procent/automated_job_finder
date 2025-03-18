@@ -1,6 +1,6 @@
-package aj.finder.ajfinder.service;
+package aj.finder.ajfinder.service.job;
 
-import aj.finder.ajfinder.AbstractApiClient;
+import aj.finder.ajfinder.api.external.ApiClient;
 import aj.finder.ajfinder.modal.platsbanken.JobAd;
 import aj.finder.ajfinder.modal.platsbanken.SearchResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +14,7 @@ import reactor.core.publisher.Mono;
 
 @Service
 @Slf4j
-public class JobSearchService extends AbstractApiClient {
+public class JobSearchService extends ApiClient {
 
     public JobSearchService(@Qualifier("jobSearchWebClient") WebClient webClient) {
         super(webClient);

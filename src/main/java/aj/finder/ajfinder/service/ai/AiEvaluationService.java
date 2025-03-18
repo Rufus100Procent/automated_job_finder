@@ -1,6 +1,6 @@
-package aj.finder.ajfinder.service;
+package aj.finder.ajfinder.service.ai;
 
-import aj.finder.ajfinder.AbstractApiClient;
+import aj.finder.ajfinder.api.external.ApiClient;
 import aj.finder.ajfinder.modal.ai.AiEvaluation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.pdfbox.Loader;
@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 
 @Service
 @Slf4j
-public class AiEvaluationService extends AbstractApiClient {
+public class AiEvaluationService extends ApiClient {
 
     @Value("${ollama.model}")
     private String ollamaModel;

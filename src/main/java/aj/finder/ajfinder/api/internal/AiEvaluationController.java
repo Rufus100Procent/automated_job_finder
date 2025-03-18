@@ -1,7 +1,7 @@
-package aj.finder.ajfinder.api;
+package aj.finder.ajfinder.api.internal;
 
 import aj.finder.ajfinder.modal.ai.AiEvaluation;
-import aj.finder.ajfinder.service.AiEvaluationService;
+import aj.finder.ajfinder.service.ai.AiEvaluationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

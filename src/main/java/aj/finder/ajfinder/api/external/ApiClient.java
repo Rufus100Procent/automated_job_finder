@@ -1,14 +1,14 @@
-package aj.finder.ajfinder;
+package aj.finder.ajfinder.api.external;
 
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public abstract class AbstractApiClient {
+public abstract class ApiClient {
 
     public final WebClient webClient;
 
-    public AbstractApiClient(WebClient webClient) {
+    public ApiClient(WebClient webClient) {
         this.webClient = webClient;
     }
 
