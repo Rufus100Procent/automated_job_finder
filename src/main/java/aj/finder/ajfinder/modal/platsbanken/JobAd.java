@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 
 @Data
 public class JobAd {
+
     private String id;
     private String external_id;
     private String original_id;
@@ -135,6 +136,7 @@ public class JobAd {
         private String city;
         private Double[] coordinates;
     }
+
 }
 
 
