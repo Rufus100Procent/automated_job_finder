@@ -33,25 +33,24 @@ public class AiEvaluationService extends ApiClient {
         super(webClient);
     }
 
+    public Mono<AiEvaluation> assessJobQualificationUsingCv(String jobDescription) {
+        File cvFile = getCvFile().orElse(null);
 
-    public Mono<AiEvaluation> evaluatePromptWithLatestCv(String userPrompt) {
-        File latestCvFile = getLatestCvFile().orElse(null);
-
-        if (latestCvFile == null) {
+        if (cvFile == null) {
             log.error("No CV file found in directory: {}", uploadDir);
             return Mono.error(new RuntimeException("No CV file found."));
         }
 
-        log.info("Processing CV file: {}", latestCvFile.getName());
+        log.info("Processing CV file: {}", cvFile.getName());
 
-        String extractedText = extractTextFromPdf(latestCvFile.getAbsolutePath());
+        String extractedText = extractTextFromPdf(cvFile.getAbsolutePath());
 
         if (extractedText.isBlank()) {
-            log.error("Extracted CV text is empty from file: {}", latestCvFile.getName());
+            log.error("Extracted CV text is empty from file: {}", cvFile.getName());
             return Mono.error(new RuntimeException("CV text extraction failed or the file is empty."));
         }
 
-        Map<String, Object> requestBody = createRequestBody(userPrompt, extractedText);
+        Map<String, Object> requestBody = createRequestBody(jobDescription, extractedText);
 
         log.info("Sending request to DeepSeek with extracted CV text...");
 
@@ -72,6 +71,20 @@ public class AiEvaluationService extends ApiClient {
                 .timeout(Duration.ofSeconds(120));
     }
 
+    private Optional<File> getCvFile() {
+        File dir = new File(uploadDir);
+
+        if (!dir.exists() || !dir.isDirectory()) {
+            log.error("CV upload directory does not exist: {}", uploadDir);
+            return Optional.empty();
+        }
+
+        return Arrays.stream(Optional.ofNullable(dir.listFiles((d, name) -> name.toLowerCase().endsWith(".pdf")))
+                        .orElse(new File[0]))
+                .findFirst();
+    }
+
+
     private Map<String, Object> createRequestBody(String userPrompt, String extractedText) {
         String fullPrompt = "CV Content:\n" + extractedText + "\n\nUser Prompt:\n" + userPrompt +
                 "\n\nYour response must start with 'Yes' or 'No' as the first word, followed by a short and clear explanation in one or two sentences.";
@@ -84,19 +97,6 @@ public class AiEvaluationService extends ApiClient {
                 "prompt", fullPrompt,
                 "temperature", 0.2
         );
-    }
-
-    private Optional<File> getLatestCvFile() {
-        File dir = new File(uploadDir);
-
-        if (!dir.exists() || !dir.isDirectory()) {
-            log.error("CV upload directory does not exist: {}", uploadDir);
-            return Optional.empty();
-        }
-
-        return Arrays.stream(Optional.ofNullable(dir.listFiles((d, name) -> name.toLowerCase().endsWith(".pdf")))
-                        .orElse(new File[0]))
-                .max(Comparator.comparingLong(File::lastModified));
     }
 
     private String extractTextFromPdf(String filePath) {

@@ -21,7 +21,7 @@ public class AiEvaluationController {
     @PostMapping("/evaluate")
     public Mono<AiEvaluation> evaluate(@RequestBody Map<String, String> request) {
         String prompt = request.get("prompt");
-        return aiEvaluationService.evaluatePromptWithLatestCv(prompt);
+        return aiEvaluationService.assessJobQualificationUsingCv(prompt);
     }
 
 }
