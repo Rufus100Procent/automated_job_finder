@@ -1,8 +1,8 @@
 package aj.finder.ajfinder.api.internal;
 
 
-import aj.finder.ajfinder.modal.platsbanken.JobAd;
-import aj.finder.ajfinder.modal.platsbanken.SearchResponse;
+import aj.finder.ajfinder.dto.platsbanken.JobAd;
+import aj.finder.ajfinder.dto.platsbanken.SearchResponse;
 import aj.finder.ajfinder.service.job.JobSearchService;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;

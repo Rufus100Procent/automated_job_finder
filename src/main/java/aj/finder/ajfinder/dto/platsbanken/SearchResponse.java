@@ -1,4 +1,4 @@
-package aj.finder.ajfinder.modal.platsbanken;
+package aj.finder.ajfinder.dto.platsbanken;
 
 import lombok.Data;
 import java.util.List;

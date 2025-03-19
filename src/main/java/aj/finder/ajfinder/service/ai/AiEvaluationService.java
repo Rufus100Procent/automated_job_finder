@@ -1,7 +1,7 @@
 package aj.finder.ajfinder.service.ai;
 
 import aj.finder.ajfinder.api.external.ApiClient;
-import aj.finder.ajfinder.modal.ai.AiEvaluation;
+import aj.finder.ajfinder.dto.ai.AiEvaluation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -66,7 +66,7 @@ public class AiEvaluationService extends ApiClient {
                     AiEvaluation finalEvaluation = new AiEvaluation();
                     finalEvaluation.setResponse(combinedResponse);
                     return finalEvaluation;
-                })
+                 })
                 .doOnError(error -> log.error("Error during AI evaluation", error))
                 .timeout(Duration.ofSeconds(120));
     }
