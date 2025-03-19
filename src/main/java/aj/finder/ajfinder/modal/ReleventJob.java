@@ -11,7 +11,9 @@ public class ReleventJob {
     @Id
     private String id;
     private String urlLink;
+    private String title;
     private String description;
     private String coverLatter;
+    private boolean sent;
 
 }
