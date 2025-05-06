@@ -15,8 +15,8 @@ public class EmailController {
         this.emailService = emailService;
     }
 
-    @PostMapping("/send")
-    public Mono<Void> sendEmail(@RequestBody Email email) {
-        return emailService.sendEmail(email);
+    @PostMapping
+    public Mono<Void> sendEmail(@RequestParam String email) {
+        return emailService.sendAllRelevantJobsEmail(email);
     }
 }
